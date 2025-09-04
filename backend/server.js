@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
+const cors = require('cors');
 const app = express();
 const port = 5000;
 
@@ -18,10 +19,8 @@ const loggingMiddleware = (req, res, next) => {
     headers: req.headers,
   };
   
-  // Log to file
   fs.appendFileSync('logs.txt', `${JSON.stringify(logEntry)}\n`);
   
-  // Capture response data
   const originalSend = res.send;
   res.send = function (body) {
     fs.appendFileSync('logs.txt', `Response: ${JSON.stringify({ status: res.statusCode, body })}\n`);
@@ -31,10 +30,11 @@ const loggingMiddleware = (req, res, next) => {
   next();
 };
 
+app.use(cors());
 app.use(express.json());
 app.use(loggingMiddleware);
 
-// Root Route to handle GET /
+// Root Route
 app.get('/', (req, res) => {
   res.json({ message: 'URL Shortener Microservice API', status: 'running' });
 });
@@ -96,11 +96,10 @@ app.get('/:shortcode', (req, res) => {
     return res.status(404).json({ error: 'Short URL not found or expired' });
   }
   
-  // Track click
   analyticsStore[shortcode].push({
     timestamp: new Date().toISOString(),
     referrer: req.get('Referrer') || 'Unknown',
-    location: 'Unknown', // Mock location (could use IP-based lookup if available)
+    location: 'Unknown',
   });
   
   res.redirect(urlData.originalUrl);
@@ -123,6 +122,11 @@ app.get('/shorturls/:shortcode', (req, res) => {
     totalClicks: analyticsStore[shortcode]?.length || 0,
     clickData: analyticsStore[shortcode] || [],
   });
+});
+
+// GET /shorturls/all - List all shortcodes
+app.get('/shorturls/all', (req, res) => {
+  res.json({ shortcodes: Object.keys(urlStore) });
 });
 
 app.listen(port, () => {
