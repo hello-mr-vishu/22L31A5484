@@ -16,7 +16,7 @@ const VALID_PACKAGES = [
 
 // Configuration for the Test Server
 const LOG_API_URL = 'http://20.244.56.144/evaluation-service/logs';
-const AUTH_TOKEN = 'Bearer <your_access_token>'; // Replace with token from /auth endpoint
+const AUTH_TOKEN = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiYXVkIjoiaHR0cDovLzIwLjI0NC41Ni4xNDQvZXZhbHVhdGlvbi1zZXJ2aWNlIiwiZW1haWwiOiJ2aXNobnVyb25nYWxpMjFAZ21haWwuY29tIiwiZXhwIjoxNzU2OTY2OTcwLCJpYXQiOjE3NTY5NjYwNzAsImlzcyI6IkFmZm9yZCBNZWRpY2FsIFRlY2hub2xvZ2llcyBQcml2YXRlIExpbWl0ZWQiLCJqdGkiOiJiNTJmNjYwNS1kYzQ4LTQxMDEtODQzMi04MDUyYjZmMTlhMTgiLCJsb2NhbGUiOiJlbi1JTiIsIm5hbWUiOiJyLnZpc2hudSB2YXJkaGFuIiwic3ViIjoiNDc2YjUwMTYtMDNkZS00ZWJkLWE1OGQtZDkzNTJkNjNjYzgxIn0sImVtYWlsIjoidmlzaG51cm9uZ2FsaTIxQGdtYWlsLmNvbSIsIm5hbWUiOiJyLnZpc2hudSB2YXJkaGFuIiwicm9sbE5vIjoiMjJsMzFhNTQ4NCIsImFjY2Vzc0NvZGUiOiJZenVKZVUiLCJjbGllbnRJRCI6IjQ3NmI1MDE2LTAzZGUtNGViZC1hNThkLWQ5MzUyZDYzY2M4MSIsImNsaWVudFNlY3JldCI6Inl5ZVNtdnlHUHRZaFRQWFoifQ.GE-hccRX-fXocC3vtYxhQRwVhkt4g2QbYGqwYdQwv7I'; // Replace with token from /auth endpoint
 
 // Reusable Log function
 async function Log(stack, level, pkg, message) {
